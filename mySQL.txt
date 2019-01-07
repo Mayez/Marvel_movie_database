@@ -1,0 +1,128 @@
+CREATE TABLE Movie_database(
+    Film_id INT PRIMARY KEY AUTO_INCREMENT,
+    Film_name VARCHAR(50),
+    Running_time VARCHAR(40),
+    Canada_release_date DATE,
+    Genre VARCHAR(40),
+    Director VARCHAR(40),
+    IMDB_rating DECIMAL(2,1),
+    Rotten_tomatoes_score INT,
+    phase_id INT
+);
+
+DROP TABLE Movie_database;
+SELECT * FROM Movie_database;
+-- Adding all the movies in the MCU thus far
+
+INSERT INTO Movie_database VALUES(1,"Iron Man","126 Mins","2008-05-02",
+"Science Fiction/Thriller","Jon Favreau",7.9,93,1);
+
+INSERT INTO Movie_database VALUES(2,"The Incredible Hulk","135 Mins","2008-06-13",
+"Science Fiction/Thriller", "Louis Leterrier",6.8,67,1);
+
+INSERT INTO Movie_database VALUES(3,"Iron Man 2","124 Mins","2010-05-07",
+"Science Fiction/Action", "Jon Favreau",7.0,73,1);
+
+INSERT INTO Movie_database VALUES(4,"Thor","115 Mins","2011-05-06",
+"Fantasy/Science Fiction", "Kenneth Branagh",7.0,77,1);
+
+INSERT INTO Movie_database VALUES(5,"Captain America: The First Avenger","124 Mins","2011-07-22",
+"Science Fiction/Thriller", "Joe Johnston",6.9,80,1);
+
+INSERT INTO Movie_database VALUES(6,"The Avengers","143 Mins","2012-05-04",
+"Fantasy/Science Fiction", "Joss Whedon",8.1,92,1);
+
+INSERT INTO Movie_database VALUES(7,"Iron Man 3","131 Mins","2013-05-03",
+"Science Fiction/Action", "Shane Black",7.2,80,2);
+
+INSERT INTO Movie_database VALUES(8,"Thor: The Dark World","112 Mins","2013-10-22",
+"Fantasy/Science Fiction", "Alan Taylor",7,66,2);
+
+INSERT INTO Movie_database VALUES(9,"Captain America: The Winter Soldier","136 Mins","2014-04-04",
+"Science Fiction/Thriller", "Russo Brothers",7.8,70,2);
+
+INSERT INTO Movie_database VALUES(10,"Guardians of the Galaxy","125 Mins","2014-08-01",
+"Fantasy/Science Fiction", "James Gunn",8.1,91,2);
+
+INSERT INTO Movie_database VALUES(11,"Avengers: Age of Ultron","142 Mins","2015-05-01",
+"Science Fiction/Action", "Joss Whedon",7.4,75,2);
+
+INSERT INTO Movie_database VALUES(12,"Ant-Man","118 Mins","2015-07-15",
+"Science Fiction/Thriller", "Peyton Reed",7.3,82,2);
+
+INSERT INTO Movie_database VALUES(13,"Captain America: Civil War","148 Mins","2016-04-18",
+"Science Fiction/Thriller", "Russo Brothers",7.8,91,3);
+
+INSERT INTO Movie_database VALUES(14,"Doctor Strange","115 Mins","2016-11-04",
+"Fantasy/Science Fiction", "Scott Derrickson",7.5,89,3);
+
+INSERT INTO Movie_database VALUES(15,"Guardians of the Galax,3y Vol. 2","138 Mins","2017-05-05",
+"Fantasy/Science Fiction", "James Gunn",7.7,83,3);
+
+INSERT INTO Movie_database VALUES(16,"Spider-Man: Homecoming","133 Mins","2017-07-17",
+"Fantasy/Science Fiction", "Jon Watts",7.5,92,3);
+
+INSERT INTO Movie_database VALUES(17,"Thor: Ragnarok","130 Mins","2017-11-03",
+"Fantasy/Science Fiction", "Taika Waititi",7.9,92,3);
+
+INSERT INTO Movie_database VALUES(18,"Black Panther","135 Mins","2018-02-16",
+"Fantasy/Science Fiction", "Ryan Coogler",7.4,97,3);
+
+INSERT INTO Movie_database VALUES(19,"Avengers: Infinity War","160 Mins","2018-04-27",
+"Fantasy/Science Fiction", "Russo Brothers",8.5,84,3);
+
+INSERT INTO Movie_database VALUES(20,"Ant-Man and the Wasp","125 Mins","2018-07-06",
+"Fantasy/Science Fiction", "Peyton Reed",7.2,88,3);
+
+-- ----------------------- End of Movie Database ----------------------------------
+
+
+-- Creation of Phases table 
+CREATE TABLE Phase_Table(
+    phase_id INT PRIMARY KEY,
+    total_box_office DECIMAL(11,0)
+);
+
+ALTER TABLE Movie_database
+ADD FOREIGN KEY (phase_id)
+REFERENCES Phase_Table(phase_id)
+ON DELETE SET NULL;
+
+INSERT INTO Phase_Table VALUES(1,3811244484);
+INSERT INTO Phase_Table VALUES(2,5271691209);
+INSERT INTO Phase_Table VALUES(3,8447220208);
+
+SELECT * FROM Phase_Table;
+DROP TABLE Phase_Table;
+-- -----------------------End of Phases Table -------------------------------------
+
+-- Creation of People table
+CREATE TABLE People(
+    user_id INT PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    phase_introduction INT,
+    FOREIGN KEY(phase_introduction) REFERENCES Phase_Table(phase_id) ON DELETE SET NULL 
+);
+
+INSERT INTO People VALUES(1,"Robert","Downey",1);
+INSERT INTO People VALUES(2,"Chris","Evans",1);
+INSERT INTO People VALUES(3,"Chris","Hemsworth",1);
+INSERT INTO People VALUES(4,"Mark","Ruffalo",1);
+INSERT INTO People VALUES(5,"Sam","Jackson",1);
+INSERT INTO People VALUES(6,"Scarlet","Johansson",1);
+INSERT INTO People VALUES(7,"Jeremy","Renner",1);
+INSERT INTO People VALUES(8,"Tom","Holland",3);
+INSERT INTO People VALUES(9,"Paul","Bettany",2),;
+INSERT INTO People VALUES(10,"Chadwick","Boseman",3);
+INSERT INTO People VALUES(11,"Paul","Rudd",2);
+INSERT INTO People VALUES(12,"Chris","Pratt",2);
+INSERT INTO People VALUES(13,"Zoe","Saldana",2);
+INSERT INTO People VALUES(14,"Vin","Diesel",2);
+INSERT INTO People VALUES(15,"Benedict","Cumberbatch",3);
+INSERT INTO People VALUES(16,"Michael","Keaton",3);
+
+DROP TABLE People;
+
+
+
